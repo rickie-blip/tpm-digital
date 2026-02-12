@@ -7,7 +7,9 @@ import { Layout } from "@/components/layout/Layout";
 import { Home } from "@/pages/Home";
 import { Services } from "@/pages/Services";
 import { About } from "@/pages/About";
+import { CaseStudies } from "@/pages/CaseStudies";
 import { Contact } from "@/pages/Contact";
+import { Testimonials } from "@/pages/Testimonials";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
+            <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

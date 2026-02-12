@@ -3,11 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TrustBar } from "./TrustBar";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/testimonials", label: "Testimonials" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -16,7 +19,9 @@ export const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
+    <>
+      <TrustBar />
+      <header className="fixed top-10 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
       <div className="container-wide">
         <nav className="flex items-center justify-between h-16 sm:h-20">
           <Link to="/" className="flex items-center gap-2 sm:gap-3">
@@ -25,7 +30,7 @@ export const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 ml-auto">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -41,7 +46,7 @@ export const Header = () => {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:block ml-6">
             <Button variant="hero" size="default" asChild>
               <Link to="/contact">Start a Conversation</Link>
             </Button>
@@ -92,5 +97,6 @@ export const Header = () => {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 };

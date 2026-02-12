@@ -39,7 +39,21 @@ export const About = () => {
   return (
     <>
       {/* Hero */}
-      <section className="section-padding pt-32 md:pt-40">
+      <section className="relative overflow-hidden section-padding pt-20 md:pt-24">
+        <div className="absolute inset-0 pointer-events-none">
+          <motion.div
+            aria-hidden
+            className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-gradient-brand opacity-40 blur-3xl"
+            animate={{ x: [0, -30, 0], y: [0, 20, 0], scale: [1, 1.08, 1] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            aria-hidden
+            className="absolute -bottom-32 -left-28 h-[28rem] w-[28rem] rounded-full bg-gradient-brand-subtle opacity-55 blur-3xl"
+            animate={{ x: [0, 25, 0], y: [0, -15, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
         <div className="container-wide">
           <motion.div 
             className="max-w-4xl"

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, MessageCircle, TrendingUp, Target, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -41,11 +42,47 @@ const reasons = [
   }
 ];
 
+const stats = [
+  { label: "Pipeline growth", value: "310%" },
+  { label: "Avg. blended ROAS", value: "4.6x" },
+  { label: "Brands scaled", value: "100+" },
+  { label: "Markets served", value: "6" }
+];
+
 export const Home = () => {
+  const [showPill, setShowPill] = useState(false);
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const reveal = () => {
+      setShowPill(true);
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
+      }
+      hideTimerRef.current = setTimeout(() => setShowPill(false), 2000);
+    };
+
+    const events: (keyof WindowEventMap)[] = [
+      "scroll",
+      "mousemove",
+      "touchstart",
+      "keydown"
+    ];
+
+    events.forEach((event) => window.addEventListener(event, reveal, { passive: true }));
+
+    return () => {
+      events.forEach((event) => window.removeEventListener(event, reveal));
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden px-4 sm:px-6">
+      <section className="relative min-h-[45vh] md:min-h-[50vh] flex items-center overflow-hidden px-4 sm:px-6 pt-8 md:pt-12 pb-12 md:pb-16">
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -54,6 +91,18 @@ export const Home = () => {
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
+          <motion.div
+            aria-hidden
+            className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-gradient-brand opacity-45 blur-3xl"
+            animate={{ x: [0, -30, 0], y: [0, 20, 0], scale: [1, 1.08, 1] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            aria-hidden
+            className="absolute -bottom-32 -left-28 h-[28rem] w-[28rem] rounded-full bg-gradient-brand-subtle opacity-55 blur-3xl"
+            animate={{ x: [0, 25, 0], y: [0, -15, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
 
         <div className="container-wide relative z-10 w-full">
@@ -63,7 +112,12 @@ export const Home = () => {
             animate="animate"
             variants={stagger}
           >
-            <motion.div variants={fadeUp} className="mb-4 sm:mb-6">
+            <motion.div
+              variants={fadeUp}
+              className="mb-4 sm:mb-6"
+              animate={showPill ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
+            >
               <span className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-muted rounded-full text-xs sm:text-sm text-muted-foreground">
                 <span className="w-2 h-2 rounded-full bg-primary animate-glow-pulse" />
                 5+ Years in the Market
@@ -143,6 +197,27 @@ export const Home = () => {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Performance Band */}
+      <section className="section-padding pt-12">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="p-6 bg-card rounded-2xl border border-border"
+              >
+                <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">{stat.value}</div>
+                <p className="text-muted-foreground">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
