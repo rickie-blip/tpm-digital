@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, Instagram } from "lucide-react";
+import tpmLogo from "@/assets/tpm-logo.jpg";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +12,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <img src="/logo.svg" alt="TPM Digital" className="h-12 w-12" />
+              <img src={tpmLogo} alt="TPM Digital" className="h-12 w-12 rounded-lg object-cover" />
               <span className="font-bold text-xl text-foreground">TPM Digital</span>
             </Link>
             <p className="text-muted-foreground max-w-md mb-6">
