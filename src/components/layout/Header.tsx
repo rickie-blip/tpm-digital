@@ -9,9 +9,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/case-studies", label: "Case Studies" },
   { href: "/testimonials", label: "Testimonials" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export const Header = () => {
@@ -87,11 +85,6 @@ export const Header = () => {
                   {link.label}
                 </Link>
               ))}
-              <Button variant="hero" size="default" asChild className="mt-4">
-                <Link to="/contact" onClick={() => setIsOpen(false)}>
-                  Start a Conversation
-                </Link>
-              </Button>
             </div>
           </motion.div>
         )}
