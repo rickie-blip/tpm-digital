@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TrustBar } from "./TrustBar";
+import tpmLogo from "@/assets/tpm-logo.jpg";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -23,7 +24,7 @@ export const Header = () => {
       <div className="container-wide">
         <nav className="flex items-center justify-between h-16 sm:h-20">
           <Link to="/" className="flex items-center gap-2 sm:gap-3">
-            <img src="/logo.svg" alt="TPM Digital" className="h-8 w-8 sm:h-12 sm:w-12" />
+            <img src={tpmLogo} alt="TPM Digital" className="h-8 w-8 sm:h-12 sm:w-12 rounded-lg object-cover" />
             <span className="font-bold text-lg sm:text-xl text-foreground">TPM Digital</span>
           </Link>
 
