@@ -178,7 +178,7 @@ export const About = () => {
         </div>
       </section>
 
-      {/* Pride of Kenya Awards */}
+      {/* P.O.K.A*/}
       <section className="section-padding">
         <div className="container-wide">
           <motion.div
